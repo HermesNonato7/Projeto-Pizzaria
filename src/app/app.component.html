@@ -1,0 +1,27 @@
+<!--
+<app-customer></app-customer>
+<app-pizza></app-pizza>
+-->
+<header>
+    <nav>
+        <ul>
+            <li>
+                <a routerLink="/" [routerLinkActive]="['linkAtivo']" [routerLinkActiveOptions]="{exact: true}">Home</a>
+            </li>
+            <li>
+                <a routerLink="/cadastro-cliente/marcos/123" [routerLinkActive]="['linkAtivo']" >Cadastro de Cliente</a>
+            </li>
+            <li>
+                <a routerLink="/cadastro-pizza" [routerLinkActive]="['linkAtivo']" >Cadastro de Pizza</a>
+            </li>
+            <li>
+                <a routerLink="/pedido" [routerLinkActive]="['linkAtivo']" >Pedido</a>
+            </li>
+            <li>
+                <a routerLink="/404" [routerLinkActive]="['linkAtivo']" [routerLinkActiveOptions]="{exact: true}">Erro 404</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<hr>
+<router-outlet></router-outlet>

@@ -1,0 +1,9 @@
+<p>Login</p>
+
+<form #formulario="ngForm" (ngSubmit)="enviaFormulario(formulario)">
+    <div>
+        <input type="text" name="usuario" ngModel placeholder="Usuário" required>
+    </div>
+    <div><input type="password" name="senha" ngModel placeholder="Senha" required></div>
+    <button [disabled]="formulario.invalid">Submit</button>
+</form>

@@ -1,0 +1,14 @@
+input {
+    margin: 5px 5px;
+    width: 200px;
+}
+
+.alert {
+    color: red;
+    background: white;
+}
+
+.alertBlue{
+    color: blue;
+    background: white;
+}

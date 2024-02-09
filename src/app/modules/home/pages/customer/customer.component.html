@@ -1,0 +1,69 @@
+<h2>Clientes</h2>
+<ul>
+    <li *ngFor="let item of customers">
+        Telefone: {{ item.id.telephone }} - CPF: {{ item.id.cpf }} - Nome: {{ item.name }} - Endereço: {{ item.address }}
+        <button (click)="deleteCustomer(item.id.telephone, item.id.cpf)">Remover</button>
+    </li>
+</ul>
+<hr>
+
+<h2>Cadastro de Cliente</h2>
+<!--
+<div><input #telefone placeholder="Telefone"></div>
+<div><input #cpf placeholder="CPF"></div>
+<div><input #nome placeholder="Nome"></div>
+<div><input #endereco placeholder="Endereço"></div>
+<button (click)="addCustomer(telefone.value, cpf.value, nome.value, endereco.value)">Adicionar Cliente</button>
+<button (click)="modifyCustomer(telefone.value, cpf.value, nome.value, endereco.value)">Modificar Cliente</button>
+<hr>
+-->
+<form #formulario="ngForm" (ngSubmit)="enviaFormulario(formulario)">
+    <div>
+        <input type="text" name="telefone" #telefone="ngModel" [ngModel]="telefone.value" placeholder="Telefone" required minlength="11" maxlength="11">
+        <span *ngIf="!telefone.valid && (telefone.dirty || telefone.touched)">
+            <span class="alertBlue" *ngIf="telefone.errors?.['minlength']">
+                Preencher com 
+                {{ telefone.errors?.['minlength'].requiredLength }}
+                dígitos, você já digitou 
+                {{ telefone.errors?.['minlength'].actualLength }}
+            </span>
+            <span class="alert" *ngIf="!telefone.errors?.['minlength']">
+                Campo obrigatório
+            </span>
+        </span>
+    </div>
+    <div><input type="text" name="cpf" ngModel placeholder="CPF" required></div>
+    <div><input type="text" name="nome" ngModel placeholder="Nome" required></div>
+    <div><input type="text" name="endereco" ngModel placeholder="Endereço" required></div>
+    <button (click)="addCustomer(formulario.value.telefone, formulario.value.cpf, formulario.value.nome, formulario.value.endereco)">Adicionar Cliente</button>
+    <button (click)="modifyCustomer(formulario.value.telefone, formulario.value.cpf, formulario.value.nome, formulario.value.endereco)">Modificar Cliente</button>
+    <button [disabled]="formulario.invalid">Submit</button>
+    
+    <div><input type="radio" name="maioridade" value="maior" ngModel><label>Maior de idade</label></div>
+    <div><input type="radio" name="maioridade" value="menor" ngModel><label>Menor de idade</label></div>
+    <div><input type="radio" name="maioridade" value="não informado" ngModel><label>Não informado</label></div>
+
+    <div><input type="checkbox" name="autorizado" ngModel><label>Autorizado</label></div>
+
+    <div>
+        <select name="cidades" ngModel>
+            <option value="" default>Selecione a cidade</option>
+            <option *ngFor= "let item of cidades" [ngValue] = "item">
+                {{ item.cidade }} ({{ item.populacao }})
+            </option>
+        </select>
+    </div>
+</form>
+<hr>
+{{ formulario.value | json }}
+<hr>
+
+Telefone válido: {{ telefone.valid}}
+<br>
+Telefone sujo: {{ telefone.dirty}}
+<br>
+Telefone clicado: {{ telefone.touched}}
+<br>
+Formulário válido: {{ formulario.valid }}
+<br>
+Erros do campo telefone: {{ telefone.errors?.['minlength'] | json }}
